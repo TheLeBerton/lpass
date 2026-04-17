@@ -3,3 +3,5 @@ compile_commands.json
 lpass
 test_runner
 .cache
+CLAUDE.md
+.claude

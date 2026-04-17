@@ -8,7 +8,7 @@ SRCS		= srcs/utils.c \
 			  srcs/vault/entry_helpers.c \
 			  srcs/vault/entry.c
 
-TESTS		= tests/entry_test.c
+TESTS		= tests/entry/create_test.c
 
 OBJSDIR		= objs
 OBJS		= $(addprefix $(OBJSDIR)/, $(SRCS:.c=.o))
