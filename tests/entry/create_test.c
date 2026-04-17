@@ -7,7 +7,6 @@
 
 static t_vault	vault;
 
-
 static t_vault	fresh_vault( void ) {
 	t_vault	vault = { 0 };
 	return ( vault );
