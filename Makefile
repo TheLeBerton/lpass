@@ -7,7 +7,8 @@ TESTFLAGS	= $(shell pkg-config --cflags --libs criterion)
 SRCS		= srcs/utils.c \
 			  srcs/vault/entry_helpers.c \
 			  srcs/vault/entry.c \
-			  srcs/vault/vault.c
+			  srcs/vault/vault.c \
+			  srcs/vault/vault_helpers.c
 
 TESTS		= tests/entry/create_test.c \
 			  tests/entry/get_test.c \
