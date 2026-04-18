@@ -10,7 +10,8 @@ SRCS		= srcs/utils.c \
 
 TESTS		= tests/entry/create_test.c \
 			  tests/entry/get_test.c \
-			  tests/entry/search_test.c
+			  tests/entry/search_test.c \
+			  tests/entry/update_test.c
 
 OBJSDIR		= objs
 OBJS		= $(addprefix $(OBJSDIR)/, $(SRCS:.c=.o))
