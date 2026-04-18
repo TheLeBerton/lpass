@@ -11,7 +11,8 @@ SRCS		= srcs/utils.c \
 TESTS		= tests/entry/create_test.c \
 			  tests/entry/get_test.c \
 			  tests/entry/search_test.c \
-			  tests/entry/update_test.c
+			  tests/entry/update_test.c \
+			  tests/entry/delete_test.c
 
 OBJSDIR		= objs
 OBJS		= $(addprefix $(OBJSDIR)/, $(SRCS:.c=.o))
@@ -37,4 +38,13 @@ re: fclean all
 
 test: $(OBJS)
 	$(CC) $(CFLAGS) $(TESTS) $(OBJS) $(TESTFLAGS) -o $(NAMETEST)
-	./$(NAMETEST)
+	@printf "\n======== entry_create ========\n\n"
+	-@./$(NAMETEST) --filter "entry_create/*"
+	@printf "\n======== entry_get ========\n\n"
+	-@./$(NAMETEST) --filter "entry_get/*"
+	@printf "\n======== entry_search ========\n\n"
+	-@./$(NAMETEST) --filter "entry_search/*"
+	@printf "\n======== entry_update ========\n\n"
+	-@./$(NAMETEST) --filter "entry_update/*"
+	@printf "\n======== entry_delete ========\n\n"
+	-@./$(NAMETEST) --filter "entry_delete/*"
