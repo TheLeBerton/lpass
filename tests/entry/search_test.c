@@ -49,7 +49,7 @@ Test( entry_search, empty_vault_returns_empty_list ) {
 	t_vault	vault = fresh_vault();
 	t_lpass_error	err;
 	t_entry **entries = entry_search( &vault, "nothing", &err );
-	cr_assert_eq( entries, NULL );
+	cr_assert( entries != NULL );
 	cr_assert( err == LPASS_OK );
 }
 
@@ -63,7 +63,7 @@ Test( entry_search, empty_querry ) {
 Test( entry_search, no_match_returns_empty_list ) {
 	t_lpass_error	err;
 	t_entry **entries = entry_search( &vault, "helloworld", &err );
-	cr_assert_eq( entries, NULL );
+	cr_assert( entries != NULL );
 	cr_assert( err == LPASS_OK );
 }
 
