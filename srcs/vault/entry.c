@@ -7,6 +7,9 @@
 #include <string.h>
 #include <time.h>
 
+/**
+ * Returns a pointer to the new entry or `NULL` if failed.
+ */
 t_entry	*entry_create( t_vault *vault, t_entry_params *params, t_lpass_error *err ) {
 	*err = LPASS_OK;
 	if ( ( *err = _validate_params( vault, params ) ) != LPASS_OK )
@@ -19,6 +22,9 @@ t_entry	*entry_create( t_vault *vault, t_entry_params *params, t_lpass_error *er
 	return &vault->entries[ vault->entry_count - 1 ];
 }
 
+/**
+ * Returns the first entry found in the `vault` with `label`.
+ */
 t_entry	*entry_get( t_vault *vault, char *label, t_lpass_error *err ) {
 	if ( !vault || !label ) {
 		*err = LPASS_ERR_NULL;
@@ -33,6 +39,9 @@ t_entry	*entry_get( t_vault *vault, char *label, t_lpass_error *err ) {
 	return ( NULL );
 }
 
+/**
+ * Returns a list of all entries with `query` as `label`, `url` or `username` in the `vault`.
+ */
 t_entry	**entry_search( t_vault *vault, char *query, t_lpass_error *err ) {
 	if ( !vault || !query ) {
 		*err = LPASS_ERR_NULL;
@@ -61,6 +70,9 @@ t_entry	**entry_search( t_vault *vault, char *query, t_lpass_error *err ) {
 	return ( entries );
 }
 
+/**
+ * Finds an entry with `label` in the `vault` and updates it with `new_data`.
+ */
 t_lpass_error		entry_update( t_vault *vault, char *label, t_entry_params *new_data ) {
 	if ( !vault || !label || !new_data )
 		return LPASS_ERR_NULL;
@@ -77,6 +89,9 @@ t_lpass_error		entry_update( t_vault *vault, char *label, t_entry_params *new_da
 	return ( LPASS_OK );
 }
 
+/**
+ * Deletes the first entry found with `label` in the `vault`.
+ */
 t_lpass_error		entry_delete( t_vault *vault, char *label ) {
 	if ( !vault || !label )
 		return LPASS_ERR_NULL;

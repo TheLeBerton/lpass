@@ -8,11 +8,17 @@
 
 static t_vault	vault;
 
+/**
+ * Returns an empty `vault` for the global.
+ */
 static t_vault	fresh_vault( void ) {
 	t_vault	vault = { 0 };
 	return ( vault );
 }
 
+/*
+ * Sets up a `vault` with one entry "github" for each test.
+ */
 static void	setup( void ) {
 	vault = fresh_vault();
 	t_entry_params	params = { "github", "github.com", "ftleo", "123", "blabla" };
@@ -20,6 +26,9 @@ static void	setup( void ) {
 	entry_create( &vault, &params, &err );
 }
 
+/*
+ * Frees `vault.entries` after each test.
+ */
 static void	teardown( void ) {
 	free( vault.entries );
 }

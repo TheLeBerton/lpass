@@ -7,15 +7,24 @@
 
 static t_vault	vault;
 
+/**
+ * Returns an empty `vault` for the global.
+ */
 static t_vault	fresh_vault( void ) {
 	t_vault	vault = { 0 };
 	return ( vault );
 }
 
+/*
+ * Sets up an empty `vault` for each test.
+ */
 static void	setup( void ) {
 	vault = fresh_vault();
 }
 
+/*
+ * Frees `vault.entries` after each test.
+ */
 static void	teardown( void ) {
 	free( vault.entries );
 }
