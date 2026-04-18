@@ -4,6 +4,9 @@
 #include <stdlib.h>
 #include <string.h>
 
+/**
+ * Saves a `vault` to `path` in raw bytes.
+ */
 t_lpass_error	vault_save( t_vault *vault, char *path ) {
 	if ( !vault || !path )
 		return ( LPASS_ERR_NULL );
@@ -30,6 +33,9 @@ t_lpass_error	vault_save( t_vault *vault, char *path ) {
 	return ( LPASS_OK );
 }
 
+/**
+ * Loads a `vault` from `path`.
+ */
 t_lpass_error	vault_load( t_vault **vault, char *path ) {
 	if ( !vault || !path )
 		return ( LPASS_ERR_NULL );
