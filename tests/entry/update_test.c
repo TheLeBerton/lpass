@@ -46,7 +46,7 @@ Test( entry_update, null_new_data_returns_error ) {
 Test( entry_update, not_found_returns_error ) {
 	t_entry	new_data = { 0 };
 	t_lpass_error	err = entry_update( &vault, "nothinginthere", &new_data );
-	cr_assert( err == LPASS_ERR_NOT_FOUND );
+	cr_assert( err == LPASS_WARN_NOT_FOUND );
 }
 
 Test( entry_update, updates_fields_correctly ) {

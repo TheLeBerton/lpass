@@ -29,7 +29,7 @@ t_entry	*entry_get( t_vault *vault, char *label, t_lpass_error *err ) {
 		if ( strcasecmp( vault->entries[ i ].label, label ) == 0 )
 			return ( &vault->entries[ i ] );
 	}
-	*err = LPASS_ERR_NOT_FOUND;
+	*err = LPASS_WARN_NOT_FOUND;
 	return ( NULL );
 }
 
@@ -39,7 +39,7 @@ t_entry	**entry_search( t_vault *vault, char *query, t_lpass_error *err ) {
 		return ( NULL );
 	}
 	if ( strlen( query ) == 0 ) {
-		*err = LPASS_ERR_NOT_FOUND;
+		*err = LPASS_WARN_NOT_FOUND;
 		return ( NULL );
 	}
 	*err = LPASS_OK;
@@ -81,14 +81,14 @@ t_lpass_error		entry_delete( t_vault *vault, char *label ) {
 	if ( !vault || !label )
 		return LPASS_ERR_NULL;
 	if ( vault->entry_count == 0 )
-		return LPASS_ERR_EMPTY;
+		return LPASS_WARN_EMPTY;
 	uint32_t	entry_index;
 	for ( entry_index = 0; entry_index < vault->entry_count; entry_index++ ) {
 		if ( strcasecmp( vault->entries[ entry_index ].label, label ) == 0 )
 			break ;
 	}
 	if ( entry_index == vault->entry_count )
-		return ( LPASS_ERR_NOT_FOUND );
+		return ( LPASS_WARN_NOT_FOUND );
 	for ( uint32_t i = entry_index; i < vault->entry_count; i++ ) {
 		vault->entries[ i ] = vault->entries[ i + 1 ];
 	}

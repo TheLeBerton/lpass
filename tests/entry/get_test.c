@@ -50,7 +50,7 @@ Test( entry_get, return_entry_on_success ) {
 Test( entry_get, not_found_returns_error ) {
 	t_lpass_error	err;
 	t_entry	*entry = entry_get( &vault, "nonexistent", &err );
-	cr_assert( err == LPASS_ERR_NOT_FOUND );
+	cr_assert( err == LPASS_WARN_NOT_FOUND );
 	cr_assert_null( entry );
 }
 

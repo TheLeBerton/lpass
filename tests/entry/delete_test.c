@@ -38,7 +38,7 @@ Test( entry_delete, null_label_returns_error ) {
 Test( entry_delete, empty_vault_returns_error_empty ) {
 	t_vault	vault = { 0 };
 	t_lpass_error	err = entry_delete( &vault, "github" );
-	cr_assert( err == LPASS_ERR_EMPTY );
+	cr_assert( err == LPASS_WARN_EMPTY );
 }
 
 Test( entry_delete, entry_gets_deleted ) {

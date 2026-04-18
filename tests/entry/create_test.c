@@ -115,10 +115,10 @@ struct create_invalid_case {
 
 ParameterizedTestParameters( entry_create, empty_required_field_returns_error ){
 	static struct create_invalid_case	cases[] = {
-		{ { "", "github.com", "ftleo", "123", "blabla" }, LPASS_ERR_EMPTY },
-		{ { "github", "", "ftleo", "123", "blabla" }, LPASS_ERR_EMPTY },
-		{ { "github", "github.com", "ftleo", "", "blabla" }, LPASS_ERR_EMPTY },
-		{ { "github", "github.com", "", "123", "blabla" }, LPASS_ERR_EMPTY },
+		{ { "", "github.com", "ftleo", "123", "blabla" }, LPASS_WARN_EMPTY },
+		{ { "github", "", "ftleo", "123", "blabla" }, LPASS_WARN_EMPTY },
+		{ { "github", "github.com", "ftleo", "", "blabla" }, LPASS_WARN_EMPTY },
+		{ { "github", "github.com", "", "123", "blabla" }, LPASS_WARN_EMPTY },
 	};
 	size_t	count = sizeof( cases ) / sizeof( cases[ 0 ] );
 	return ( cr_make_param_array( struct create_invalid_case, cases, count, NULL ) );

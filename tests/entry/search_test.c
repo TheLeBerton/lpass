@@ -57,7 +57,7 @@ Test( entry_search, empty_querry ) {
 	t_lpass_error	err;
 	t_entry **entries = entry_search( &vault, "", &err );
 	cr_assert_eq( entries, NULL );
-	cr_assert( err == LPASS_ERR_NOT_FOUND );
+	cr_assert( err == LPASS_WARN_NOT_FOUND );
 }
 
 Test( entry_search, no_match_returns_empty_list ) {

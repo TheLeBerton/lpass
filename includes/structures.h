@@ -5,11 +5,11 @@
 #include <time.h>
 
 typedef enum	e_lpass_error {
-	LPASS_OK			= 0,
-	LPASS_ERR_NULL		= -1,
-	LPASS_ERR_EMPTY		= -2,
-	LPASS_ERR_NOT_FOUND = -3,
-	LPASS_ERR_MEMORY	= -4,
+	LPASS_OK				=  0,
+	LPASS_WARN_NOT_FOUND	=  1,
+	LPASS_WARN_EMPTY		=  2,
+	LPASS_ERR_NULL			= -1,
+	LPASS_ERR_MEMORY		= -2,
 }	t_lpass_error;
 
 typedef struct s_entry_params {

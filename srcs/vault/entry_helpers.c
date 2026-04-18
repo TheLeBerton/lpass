@@ -17,7 +17,7 @@ t_lpass_error	_validate_params( t_vault *vault, t_entry_params *params ) {
 		|| _is_empty( params->url ) 
 		|| _is_empty( params->username ) 
 		|| _is_empty( params->password ) )
-		return ( LPASS_ERR_EMPTY );
+		return ( LPASS_WARN_EMPTY );
 	return ( LPASS_OK );
 }
 
