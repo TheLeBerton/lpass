@@ -124,7 +124,7 @@ ParameterizedTestParameters( entry_create, empty_required_field_returns_error ){
 	return ( cr_make_param_array( struct create_invalid_case, cases, count, NULL ) );
 }
 
-ParameterizedTest( struct create_invalid_case *tc, entry_create, empty_param ) {
+ParameterizedTest( struct create_invalid_case *tc, entry_create, empty_required_field_returns_error ) {
 	t_lpass_error	err;
 	t_entry	*entry = entry_create( &vault, &tc->params, &err );
 	cr_assert_null( entry );
