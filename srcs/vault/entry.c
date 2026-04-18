@@ -61,7 +61,7 @@ t_entry	**entry_search( t_vault *vault, char *query, t_lpass_error *err ) {
 	return ( entries );
 }
 
-t_lpass_error		entry_update( t_vault *vault, char *label, t_entry *new_data ) {
+t_lpass_error		entry_update( t_vault *vault, char *label, t_entry_params *new_data ) {
 	if ( !vault || !label || !new_data )
 		return LPASS_ERR_NULL;
 	t_lpass_error err;
