@@ -10,6 +10,7 @@ typedef enum	e_lpass_error {
 	LPASS_WARN_EMPTY		=  2,
 	LPASS_ERR_NULL			= -1,
 	LPASS_ERR_MEMORY		= -2,
+	LPASS_ERR_FILE			= -3,
 }	t_lpass_error;
 
 typedef struct s_entry_params {
