@@ -12,11 +12,11 @@ static t_vault	fresh_vault( void ) {
 	return ( vault );
 }
 
-void	setup( void ) {
+static void	setup( void ) {
 	vault = fresh_vault();
 }
 
-void	teardown( void ) {
+static void	teardown( void ) {
 	free( vault.entries );
 }
 

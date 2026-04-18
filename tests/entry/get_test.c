@@ -12,14 +12,14 @@ static t_vault	fresh_vault( void ) {
 	return ( vault );
 }
 
-void	setup( void ) {
+static void	setup( void ) {
 	vault = fresh_vault();
 	t_entry_params	params = { "github", "github.com", "ftleo", "123", "blabla" };
 	t_lpass_error	err;
 	entry_create( &vault, &params, &err );
 }
 
-void	teardown( void ) {
+static void	teardown( void ) {
 	free( vault.entries );
 }
 
