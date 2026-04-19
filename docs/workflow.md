@@ -17,8 +17,9 @@ make fclean   # remove object files + binaries
 | Case | Branch |
 |------|--------|
 | Normal work | `master` directly |
-| Non-trivial refactor | `refactor/name` |
-| Experimental feature | `feat/name` |
+| Non-trivial feature | `feature/name` → PR |
+| Non-trivial refactor | `refactor/name` → PR |
+| Experimental | `feat/name` |
 | Hotfix | `master` directly |
 
 ### Commit messages
@@ -33,6 +34,38 @@ chore:    makefile, dependencies, config
 ```
 
 One commit per logical change — not per file.
+
+### Pull Requests
+
+Open a PR when working on a `feature/` or `refactor/` branch. Link the related issue in the PR description. Merge into `master` once done.
+
+---
+
+## GitHub Issues
+
+### Labels
+
+| Label | Usage |
+|-------|-------|
+| `feat` | New feature or functionality |
+| `bug` | Something isn't working |
+| `refactor` | Code restructure without behavior change |
+| `test` | Adding or fixing tests |
+| `docs` | Documentation improvements |
+| `security` | Encryption, keys, or sensitive data |
+| `design` | Architecture or API design discussion |
+| `build` | Makefile, compilation, install |
+
+### Milestones
+
+| Milestone | Description |
+|-----------|-------------|
+| `MVP` | Minimum viable product — save and retrieve securely |
+| `v1.0` | Full release — 6 commands working, installable, documented |
+
+### Sub-issues
+
+Parent issues describe a feature with acceptance criteria. Sub-issues (or prerequisite links) break it into smaller independent tasks assigned to the same milestone.
 
 ---
 
