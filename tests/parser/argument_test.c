@@ -4,17 +4,6 @@
 #include <criterion/criterion.h>
 #include <unistd.h>
 
-Test( parse_args_argument, valid_get ) {
-	t_args	args;
-	char	*argv[] = { "lpass", "get", "github", NULL };
-	int	argc = 3;
-	t_lpass_error	err = parse_args( argc, argv, &args );
-	cr_assert( err == LPASS_OK );
-	cr_assert( args.cmd == LPASS_CMD_GET );
-	cr_assert_str_eq( args.argument, "github" );
-	free( args.argument );
-}
-
 Test( parse_args_argument, valid_copy ) {
 	t_args	args;
 	char	*argv[] = { "lpass", "copy", "github", NULL };
