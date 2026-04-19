@@ -26,7 +26,7 @@ Test( parse_args_argument, valid_delete ) {
 	free( args.argument );
 }
 
-Test( parse_args_argument, missing_argument ) {
+Test( parse_args_argument, missing_argument_delete ) {
 	t_args	args;
 	char	*argv[] = { "lpass", "delete", "", NULL };
 	int	argc = 3;
@@ -36,3 +36,12 @@ Test( parse_args_argument, missing_argument ) {
 	cr_assert_null( args.argument );
 }
 
+Test( parse_args_argument, missing_argument_copy ) {
+	t_args	args;
+	char	*argv[] = { "lpass", "copy", "", NULL };
+	int	argc = 3;
+	t_lpass_error	err = parse_args( argc, argv, &args );
+	cr_assert( err == LPASS_ERR_ARGS_MISSING );
+	cr_assert( args.cmd == LPASS_CMD_COPY );
+	cr_assert_null( args.argument );
+}
