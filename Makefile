@@ -9,7 +9,8 @@ SRCS		= srcs/utils.c \
 			  srcs/vault/entry.c \
 			  srcs/vault/vault.c \
 			  srcs/vault/vault_helpers.c \
-			  srcs/core/parser.c
+			  srcs/core/parser.c \
+			  srcs/core/error_handler.c 
 
 TESTS		= tests/entry/create_test.c \
 			  tests/entry/get_test.c \
