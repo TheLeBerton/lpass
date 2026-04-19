@@ -8,7 +8,9 @@ SRCS		= srcs/utils.c \
 			  srcs/vault/entry_helpers.c \
 			  srcs/vault/entry.c \
 			  srcs/vault/vault.c \
-			  srcs/vault/vault_helpers.c
+			  srcs/vault/vault_helpers.c \
+			  srcs/core/parser.c \
+			  srcs/core/error_handler.c 
 
 TESTS		= tests/entry/create_test.c \
 			  tests/entry/get_test.c \
@@ -16,7 +18,10 @@ TESTS		= tests/entry/create_test.c \
 			  tests/entry/update_test.c \
 			  tests/entry/delete_test.c \
 			  tests/vault/save_test.c \
-			  tests/vault/load_test.c
+			  tests/vault/load_test.c \
+			  tests/parser/argc_test.c \
+			  tests/parser/argument_test.c \
+			  tests/parser/command_test.c
 
 OBJSDIR		= objs
 OBJS		= $(addprefix $(OBJSDIR)/, $(SRCS:.c=.o))
@@ -58,3 +63,10 @@ test: $(OBJS)
 	-@./$(NAMETEST) --filter "vault_save/*"
 	@printf "\n======== vault_load ========\n\n"
 	-@./$(NAMETEST) --filter "vault_load/*"
+	@printf "\n\n======== PARSER ========\n\n"
+	@printf "\n======== parser_args_argc ========\n\n"
+	-@./$(NAMETEST) --filter "parse_args_argc/*"
+	@printf "\n======== parser_args_command ========\n\n"
+	-@./$(NAMETEST) --filter "parse_args_command/*"
+	@printf "\n======== parser_args_argument ========\n\n"
+	-@./$(NAMETEST) --filter "parse_args_argument/*"
