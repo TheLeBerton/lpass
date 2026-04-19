@@ -8,7 +8,7 @@ static void	_print_usage() {
 	fprintf( stderr, "	- init\n" );
 	fprintf( stderr, "	- add\n" );
 	fprintf( stderr, "	- list\n" );
-	fprintf( stderr, "	- get <label>\n" );
+	fprintf( stderr, "	- gen\n" );
 	fprintf( stderr, "	- copy <label>\n" );
 	fprintf( stderr, "	- delete <label>\n" );
 }
