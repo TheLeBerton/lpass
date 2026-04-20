@@ -21,7 +21,7 @@ t_lpass_error	_validate_load_params( t_vault **vault, char *path ) {
 	return ( LPASS_OK );
 }
 
-t_lpass_error	_write_file( t_vault *vault, FILE *f ) {
+t_lpass_error	_serialize_vault( t_vault *vault, FILE *f ) {
 	size_t	bytes_written;
 	bytes_written = fwrite( &vault->entry_count, sizeof( uint32_t ), 1, f );
 	if ( bytes_written < 1 )
@@ -34,30 +34,20 @@ t_lpass_error	_write_file( t_vault *vault, FILE *f ) {
 	return ( LPASS_OK );
 }
 
-t_lpass_error	_read_file( t_vault **vault, FILE *f ) {
-	t_vault	*v = malloc( sizeof( t_vault ) );
-	if ( !v )
-		return ( LPASS_ERR_MEMORY );
-	if ( fread( &v->entry_count, sizeof( uint32_t ), 1, f ) == 0 ) {
-		free( v );
+t_lpass_error	_deserialize_vault( t_vault *v, FILE *f ) {
+	if ( fread( &v->entry_count, sizeof( uint32_t ), 1, f ) == 0 )
 		return ( LPASS_ERR_FILE );
-	}
 	if ( v->entry_count == 0 ) {
 		v->entries = NULL;
-		*vault = v;
 		return ( LPASS_OK );
 	}
 	v->entries = malloc( sizeof( t_entry ) * v->entry_count );
-	if ( !v->entries ) {
-		free( v );
+	if ( !v->entries )
 		return ( LPASS_ERR_MEMORY );
-	}
 	if ( fread( v->entries, sizeof( t_entry ), v->entry_count, f ) != v->entry_count ) {
 		free( v->entries );
-		free( v );
 		return ( LPASS_ERR_FILE );
 	}
-	*vault = v;
 	return ( LPASS_OK );
 }
 
