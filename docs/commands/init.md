@@ -4,11 +4,13 @@ The `cmd_init` is the method used for the `LPASS_CMD_INIT`.
 
 ## Responsability
 
-- Initializes the vault
-- creates `~/.lpass/vault`
-- generates `salt`
-- saves the vault
-- derives the key
+Orchestrates vault initialization in order:
+
+1. `init_lpass_dir` — creates `~/.lpass/`, checks vault doesn't exist, returns path
+2. `prompt_password` — prompts and confirms master password
+3. `generate_salt` — fills `vault->salt` with random bytes
+4. `derive_key` — derives 32-byte key from password + salt
+5. `vault_save` — writes vault to disk
 
 ## Return values
 

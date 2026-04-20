@@ -1,6 +1,6 @@
 # Crypto
 
-This module is used for all encryption/decryption methods in the project.
+Key derivation and salt generation using libsodium.
 
 ## Methods
 
@@ -10,7 +10,7 @@ t_lpass_error   derive_key( const char *password, const uint8_t *salt, uint8_t *
 > Derives a 32-byte encryption key from a password and a salt using Argon2id.
 
 ```c
-t_lpass_error   prompt_password( char *out, size_t size );
+void    generate_salt( uint8_t *salt, size_t size );
 ```
-> Prompts the user to enter and confirm a master password, hiding input from terminal.
+> Fills `salt` with `size` cryptographically random bytes.
 
