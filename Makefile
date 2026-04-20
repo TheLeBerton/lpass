@@ -11,6 +11,7 @@ SRCS		= srcs/utils.c \
 			  srcs/vault/vault.c \
 			  srcs/vault/vault_helpers.c \
 			  srcs/core/crypto.c \
+			  srcs/core/prompt.c \
 			  srcs/core/parser.c \
 			  srcs/core/error_handler.c \
 			  srcs/commands/init.c 
