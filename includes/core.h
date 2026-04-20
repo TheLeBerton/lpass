@@ -8,6 +8,9 @@ void			error_handler_args( t_lpass_error err ) ;
 void			error_handler_init( t_lpass_error err ) ;
 
 t_lpass_error	derive_key( const char *password, const uint8_t *salt, uint8_t *key ) ;
+void			generate_salt( uint8_t *salt, size_t size ) ;
+
+t_lpass_error	init_lpass_dir( char *path, size_t size ) ;
 
 t_lpass_error	prompt_password( char *out, size_t size ) ;
 

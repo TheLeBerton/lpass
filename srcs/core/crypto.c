@@ -1,5 +1,6 @@
 #include "structures.h"
 
+#include <sodium/randombytes.h>
 #include <stdint.h>
 #include <string.h>
 #include <sodium.h>
@@ -16,3 +17,6 @@ t_lpass_error	derive_key( const char *password, const uint8_t *salt, uint8_t *ke
 	return ( LPASS_OK );
 }
 
+void	generate_salt( uint8_t *salt, size_t size ) {
+	randombytes_buf( salt, size );
+}
