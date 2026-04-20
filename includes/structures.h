@@ -12,7 +12,8 @@ typedef enum	e_lpass_error {
 	LPASS_ERR_MEMORY		= -2,
 	LPASS_ERR_FILE			= -3,
 	LPASS_ERR_ARGS_INVALID	= -4,
-	LPASS_ERR_ARGS_MISSING	= -5
+	LPASS_ERR_ARGS_MISSING	= -5,
+	LPASS_ERR_ALREADY_EXISTS = -6,
 }	t_lpass_error;
 
 typedef enum	e_command {

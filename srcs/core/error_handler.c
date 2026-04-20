@@ -24,3 +24,22 @@ void	error_handler_args( t_lpass_error err ) {
 		fprintf( stderr, "[ ERROR ]: argument count smaller than 2 or missing argument for <cmd>\n" );
 	_print_usage();
 }
+
+void	error_handler_init( t_lpass_error err ) {
+	if ( err == LPASS_ERR_ALREADY_EXISTS ) {
+		fprintf( stderr, "[ ERROR ]: vault already exists\n" );
+		return ;
+	}
+	if ( err == LPASS_ERR_ARGS_INVALID ) {
+		fprintf( stderr, "[ ERROR ]: passwords do not match\n" );
+		return ;
+	}
+	if ( err == LPASS_ERR_NULL ) {
+		fprintf( stderr, "[ ERROR ]: input cannot be empty\n" );
+		return ;
+	}
+	if ( err == LPASS_ERR_MEMORY ) {
+		fprintf( stderr, "[ ERROR ]: memory allocation or crypto_pwhash failed\n" );
+		return ;
+	}
+}

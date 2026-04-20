@@ -2,7 +2,6 @@
 #include "core.h"
 #include "commands.h"
 
-#include <stdio.h>
 #include <stdlib.h>
 
 
@@ -14,8 +13,13 @@ int main( int argc, char **argv ) {
 		error_handler_args( err );
 		return ( err );
 	}
-	printf( "args.cmd: %d\n", args.cmd );
-	printf( "args.argument: %s\n", args.argument );
-	cmd_init();
+	t_vault	vault = { 0 };
+	if ( args.cmd == LPASS_CMD_INIT ) {
+		err = cmd_init( &vault );
+		if ( err != LPASS_OK ) {
+			error_handler_init( err );
+			return ( err );
+		}
+	}
 	return ( EXIT_SUCCESS );
 }

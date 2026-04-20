@@ -1,7 +1,8 @@
 NAME 		= lpass
 NAMETEST	= test_runner
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -I./includes
+CFLAGS		= -Wall -Wextra -Werror -I./includes $(shell pkg-config --cflags libsodium)
+LDFLAGS		= $(shell pkg-config --libs libsodium)
 TESTFLAGS	= $(shell pkg-config --cflags --libs criterion)
 
 SRCS		= srcs/utils.c \
@@ -9,6 +10,7 @@ SRCS		= srcs/utils.c \
 			  srcs/vault/entry.c \
 			  srcs/vault/vault.c \
 			  srcs/vault/vault_helpers.c \
+			  srcs/core/crypto.c \
 			  srcs/core/parser.c \
 			  srcs/core/error_handler.c \
 			  srcs/commands/init.c 
@@ -32,7 +34,7 @@ RM			= rm -f
 MKDIR		= mkdir -p
 
 all: $(OBJS) $(MAINOBJ)
-	$(CC) $(CFLAGS) $(OBJS) $(MAINOBJ) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(MAINOBJ) $(LDFLAGS) -o $(NAME)
 
 $(OBJSDIR)/%.o: %.c
 	$(MKDIR) $(dir $@)
@@ -47,7 +49,7 @@ fclean: clean
 re: fclean all
 
 test: $(OBJS)
-	$(CC) $(CFLAGS) $(TESTS) $(OBJS) $(TESTFLAGS) -o $(NAMETEST)
+	$(CC) $(CFLAGS) $(TESTS) $(OBJS) $(TESTFLAGS) $(LDFLAGS) -o $(NAMETEST)
 	@printf "\n======== ENTRY ========\n\n"
 	@printf "\n======== entry_create ========\n\n"
 	-@./$(NAMETEST) --filter "entry_create/*"
