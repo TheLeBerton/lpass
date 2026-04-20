@@ -1,5 +1,6 @@
 #include "structures.h"
 #include "core.h"
+#include "commands.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -15,5 +16,6 @@ int main( int argc, char **argv ) {
 	}
 	printf( "args.cmd: %d\n", args.cmd );
 	printf( "args.argument: %s\n", args.argument );
+	cmd_init();
 	return ( EXIT_SUCCESS );
 }
