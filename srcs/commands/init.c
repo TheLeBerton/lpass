@@ -1,5 +1,7 @@
 #include "structures.h"
-#include "core.h"
+#include "crypto.h"
+#include "ui.h"
+#include "fs.h"
 #include "vault.h"
 
 

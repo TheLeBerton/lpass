@@ -41,11 +41,11 @@ Negative codes = critical errors. Positive codes = expected conditions.
 
 | File | Responsibility |
 |------|---------------|
-| `srcs/core/crypto.c` | Key derivation (`derive_key`, `generate_salt`) |
-| `srcs/core/prompt.c` | Terminal UI — password prompt with echo hide |
-| `srcs/core/file_system.c` | Filesystem helpers (`init_lpass_dir`) |
-| `srcs/core/parser.c` | CLI argument parsing |
-| `srcs/core/error_handler.c` | Error message printing |
+| `srcs/crypto/crypto.c` | Key derivation (`derive_key`, `generate_salt`) |
+| `srcs/ui/prompt.c` | Terminal UI — password prompt with echo hide |
+| `srcs/fs/file_system.c` | Filesystem helpers (`init_lpass_dir`) |
+| `srcs/cli/parser.c` | CLI argument parsing |
+| `srcs/cli/error_handler.c` | Error message printing |
 | `srcs/commands/init.c` | `cmd_init` orchestration |
 | `srcs/vault/vault.c` | Vault file I/O + memory allocation (save/load) |
 | `srcs/vault/vault_helpers.c` | Binary serialization/deserialization |

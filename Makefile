@@ -10,11 +10,11 @@ SRCS		= srcs/utils.c \
 			  srcs/vault/entry.c \
 			  srcs/vault/vault.c \
 			  srcs/vault/vault_helpers.c \
-			  srcs/core/crypto.c \
-			  srcs/core/prompt.c \
-			  srcs/core/file_system.c \
-			  srcs/core/parser.c \
-			  srcs/core/error_handler.c \
+			  srcs/crypto/crypto.c \
+			  srcs/ui/prompt.c \
+			  srcs/fs/file_system.c \
+			  srcs/cli/parser.c \
+			  srcs/cli/error_handler.c \
 			  srcs/commands/init.c 
 
 TESTS		= tests/entry/create_test.c \

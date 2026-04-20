@@ -1,5 +1,5 @@
 #include "structures.h"
-#include "core.h"
+#include "crypto.h"
 
 #include <criterion/criterion.h>
 #include <criterion/internal/assert.h>

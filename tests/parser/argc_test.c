@@ -1,5 +1,5 @@
 #include "structures.h"
-#include "core.h"
+#include "cli.h"
 
 #include <criterion/criterion.h>
 #include <unistd.h>
