@@ -4,6 +4,9 @@ CC			= cc
 CFLAGS		= -Wall -Wextra -Werror -I./includes $(shell pkg-config --cflags libsodium)
 LDFLAGS		= $(shell pkg-config --libs libsodium)
 TESTFLAGS	= $(shell pkg-config --cflags --libs criterion)
+PREFIX		= "$(HOME)/.local"
+BIN			= "$(PREFIX)/bin/lpass"
+LPASS_CONF	= "$(HOME)/.lpass"
 
 SRCS		= srcs/utils.c \
 			  srcs/vault/entry_helpers.c \
@@ -54,6 +57,23 @@ fclean: clean
 	$(RM) $(NAME) $(NAMETEST)
 
 re: fclean all
+
+install: all
+	@if [ ! -f $(BIN) ]; then\
+		cp $(NAME) $(BIN);\
+		echo "[ LPASS ]: copied lpass binary to $(BIN)";\
+	fi
+
+uninstall:
+	@if [ -f $(BIN) ]; then\
+		$(RM) $(BIN);\
+		echo "[ LPASS ]: removed lpass binary from $(BIN)";\
+	fi
+	@if [ -d $(LPASS_CONF) ]; then\
+		$(RM) -r $(LPASS_CONF);\
+		echo "[ LPASS ]: removed lpass config from $(LPASS_CONF)";\
+	fi
+	
 
 test: $(OBJS)
 	$(CC) $(CFLAGS) $(TESTS) $(OBJS) $(TESTFLAGS) $(LDFLAGS) -o $(NAMETEST)
