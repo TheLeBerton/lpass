@@ -15,6 +15,7 @@ SRCS		= srcs/utils.c \
 			  srcs/fs/file_system.c \
 			  srcs/cli/parser.c \
 			  srcs/cli/error_handler.c \
+			  srcs/commands/handler.c \
 			  srcs/commands/init.c 
 
 TESTS		= tests/entry/create_test.c \
@@ -42,11 +43,12 @@ ${NAME}: $(OBJS) $(MAINOBJ)
 	$(CC) $(CFLAGS) $(OBJS) $(MAINOBJ) $(LDFLAGS) -o $(NAME)
 
 $(OBJSDIR)/%.o: %.c
-	$(MKDIR) $(dir $@)
+	@$(MKDIR) $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	$(RM) $(OBJS) $(MAINOBJ)
+	$(RM) -r $(OBJSDIR)
 
 fclean: clean
 	$(RM) $(NAME) $(NAMETEST)

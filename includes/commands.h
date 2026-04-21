@@ -3,6 +3,6 @@
 
 # include "structures.h"
 
-t_lpass_error	cmd_init( t_vault *vault ) ;
+t_lpass_error	handle_cmd( t_vault *vault, t_args args ) ;
 
 #endif

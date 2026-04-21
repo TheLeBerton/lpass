@@ -2,6 +2,7 @@
 #include "cli.h"
 #include "commands.h"
 
+#include <stdio.h>
 #include <stdlib.h>
 
 
@@ -14,12 +15,10 @@ int main( int argc, char **argv ) {
 		return ( err );
 	}
 	t_vault	vault = { 0 };
-	if ( args.cmd == LPASS_CMD_INIT ) {
-		err = cmd_init( &vault );
-		if ( err != LPASS_OK ) {
-			error_handler_init( err );
-			return ( err );
-		}
+	err = handle_cmd( &vault, args );
+	if ( err ) {
+		fprintf( stderr, "[ ERROR ]: handle_cmd returned error" );
+		return ( err );
 	}
 	return ( EXIT_SUCCESS );
 }
