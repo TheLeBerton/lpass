@@ -6,5 +6,6 @@
 
 t_lpass_error	derive_key( const char *password, const uint8_t *salt, uint8_t *key ) ;
 void			generate_salt( uint8_t *salt, size_t size ) ;
+void			generate_nonce( uint8_t *nonce, size_t size ) ;
 
 #endif

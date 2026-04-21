@@ -18,10 +18,11 @@ t_lpass_error	cmd_init( t_vault *vault ) {
 	if ( err != LPASS_OK )
 		return ( err );
 	generate_salt( vault->salt, sizeof( vault->salt ) );
+	generate_nonce( vault->nonce, sizeof( vault->nonce ) );
 	err = derive_key( password, vault->salt, key );
 	if ( err != LPASS_OK )
 		return ( err );
-	err = vault_save( vault, path );
+	err = vault_save( vault, path, key );
 	if ( err != LPASS_OK )
 		return ( err );
 	return ( LPASS_OK );

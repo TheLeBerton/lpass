@@ -14,3 +14,8 @@ void    generate_salt( uint8_t *salt, size_t size );
 ```
 > Fills `salt` with `size` cryptographically random bytes.
 
+```c
+void    generate_nonce( uint8_t *nonce, size_t size );
+```
+> Fills `nonce` with `size` cryptographically random bytes. Must be called on each save.
+

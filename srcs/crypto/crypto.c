@@ -20,3 +20,7 @@ t_lpass_error	derive_key( const char *password, const uint8_t *salt, uint8_t *ke
 void	generate_salt( uint8_t *salt, size_t size ) {
 	randombytes_buf( salt, size );
 }
+
+void	generate_nonce( uint8_t *nonce, size_t size ) {
+	randombytes_buf( nonce, size );
+}

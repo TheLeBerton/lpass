@@ -1,6 +1,7 @@
 #include "structures.h"
 #include "vault_helpers.h"
 
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -8,14 +9,14 @@
 /**
  * Saves a `vault` to `path` in raw bytes.
  */
-t_lpass_error	vault_save( t_vault *vault, char *path ) {
+t_lpass_error	vault_save( t_vault *vault, char *path, uint8_t *key ) {
 	t_lpass_error	err = _validate_save_params( vault, path );
 	if ( err != LPASS_OK )
 		return ( err );
 	FILE *f = fopen( path, "wb" );
 	if ( !f )
 		return ( LPASS_ERR_FILE );
-	err = _serialize_vault( vault, f );
+	err = _serialize_vault( vault, f, key );
 	fclose( f );
 	return ( err );
 }
@@ -23,7 +24,7 @@ t_lpass_error	vault_save( t_vault *vault, char *path ) {
 /**
  * Loads a `vault` from `path`.
  */
-t_lpass_error	vault_load( t_vault **vault, char *path ) {
+t_lpass_error	vault_load( t_vault **vault, char *path, char *password ) {
 	t_lpass_error	err = _validate_load_params( vault, path );
 	if ( err != LPASS_OK )
 		return ( err );
@@ -35,7 +36,7 @@ t_lpass_error	vault_load( t_vault **vault, char *path ) {
 		fclose( f );
 		return ( LPASS_ERR_MEMORY );
 	}
-	err = _deserialize_vault( v, f );
+	err = _deserialize_vault( v, f, password );
 	fclose( f );
 	if ( err != LPASS_OK ) {
 		free( v );

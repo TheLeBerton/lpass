@@ -16,12 +16,11 @@ typedef struct	s_vault {
 
 ### `vault_save`
 
-Saves a `vault` into a `path` in raw bytes.
+Encrypts and saves a `vault` to `path` using XChaCha20-Poly1305. The file format is: `[ salt : 32 ][ nonce : 24 ][ ciphertext_len : 8 ][ ciphertext ]`.
 
 ```c
-t_lpass_error	vault_save( t_vault *vault, char *path ) ;
+t_lpass_error	vault_save( t_vault *vault, char *path, uint8_t *key ) ;
 ```
-
 
  | return | condition |
  |------|---------|
@@ -30,17 +29,15 @@ t_lpass_error	vault_save( t_vault *vault, char *path ) ;
  | `LPASS_WARN_EMPTY` | empty `path` `str` |
  | `LPASS_ERR_FILE` | error opening / writing / closing `path` |
 
-
 ---
 
 ### `vault_load`
 
-Loads a `vault` from a `path`.
+Reads and decrypts a `vault` from `path`. Derives the key from `password` and the salt stored in the file header.
 
 ```c
-t_lpass_error	vault_load( t_vault **vault, char *path ) ;
+t_lpass_error	vault_load( t_vault **vault, char *path, char *password ) ;
 ```
-
 
  | return | condition |
  |------|---------|
@@ -48,5 +45,5 @@ t_lpass_error	vault_load( t_vault **vault, char *path ) ;
  | `LPASS_ERR_NULL` | `vault` or `path` `NULL` |
  | `LPASS_WARN_EMPTY` | empty `path` `str` |
  | `LPASS_ERR_MEMORY` | allocation failed |
- | `LPASS_ERR_FILE` | error opening / reading / closing `path` |
+ | `LPASS_ERR_FILE` | error opening / reading / closing `path`, or wrong password |
 
