@@ -36,7 +36,9 @@ MAINOBJ		= $(OBJSDIR)/main.o
 RM			= rm -f
 MKDIR		= mkdir -p
 
-all: $(OBJS) $(MAINOBJ)
+all: ${NAME}
+
+${NAME}: $(OBJS) $(MAINOBJ)
 	$(CC) $(CFLAGS) $(OBJS) $(MAINOBJ) $(LDFLAGS) -o $(NAME)
 
 $(OBJSDIR)/%.o: %.c
