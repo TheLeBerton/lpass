@@ -4,16 +4,23 @@
 #include <stdlib.h>
 #include <sys/stat.h>
 
-t_lpass_error	init_lpass_dir( char *path, size_t size ) {
+t_lpass_error	get_vault_path( char *path, size_t size ) {
 	char dir[ 512 ];
+
 	if ( getenv( "HOME" ) == NULL )
 		return ( LPASS_ERR_NULL );
 	snprintf( dir, sizeof( dir ), "%s/.lpass", getenv( "HOME" ) );
 	mkdir( dir, 0700 );
 	snprintf( path, size, "%s/.lpass/vault", getenv( "HOME" ) );
+	return ( LPASS_OK );
+}
+
+t_lpass_error	init_lpass_dir( char *path, size_t size ) {
+	get_vault_path( path, size );
 	struct stat	st;
 	if ( stat( path, &st ) == 0 ) {
 		return ( LPASS_ERR_ALREADY_EXISTS );
 	}
 	return ( LPASS_OK );
 }
+
