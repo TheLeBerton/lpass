@@ -5,6 +5,22 @@
 #include <stdlib.h>
 #include <string.h>
 
+typedef struct	s_cmd_policy {
+	char		*str;
+	t_command	cmd;
+	int			needs_arg;
+}	t_cmd_policy;
+
+t_cmd_policy policies[] = {
+	{ "init", LPASS_CMD_INIT, 0 },
+	{ "add", LPASS_CMD_ADD, 0 },
+	{ "list", LPASS_CMD_LIST, 0 },
+	{ "gen", LPASS_CMD_GEN, 0 },
+	{ "get", LPASS_CMD_GET, 1 },
+	{ "copy", LPASS_CMD_COPY, 1 },
+	{ "delete", LPASS_CMD_DEL, 1 }
+};
+
 static t_lpass_error	_handle_command( char *arg, t_args *args ) ;
 static t_lpass_error	_add_arg_to_cmd( t_args *args, char *arg ) ;
 static int				_needs_arg( t_command cmd ) ;
@@ -46,26 +62,17 @@ static t_lpass_error	_handle_command( char *arg, t_args *args ) {
 	char *lower_arg = str_to_lower( arg );
 	if ( !lower_arg )
 		return ( LPASS_ERR_MEMORY );
-	if ( strcmp( lower_arg, "init" ) == 0 )
-		args->cmd = LPASS_CMD_INIT;
-	else if ( strcmp( lower_arg, "add" ) == 0 )
-		args->cmd = LPASS_CMD_ADD;
-	else if ( strcmp( lower_arg, "list" ) == 0 )
-		args->cmd = LPASS_CMD_LIST;
-	else if ( strcmp( lower_arg, "copy" ) == 0 )
-		args->cmd = LPASS_CMD_COPY;
-	else if ( strcmp( lower_arg, "delete" ) == 0 )
-		args->cmd = LPASS_CMD_DEL;
-	else if ( strcmp( lower_arg, "gen" ) == 0 )
-		args->cmd = LPASS_CMD_GEN;
-	else if ( strcmp( lower_arg, "get" ) == 0 )
-		args->cmd = LPASS_CMD_GET;
-	else {
-		args->cmd = LPASS_CMD_UNKNOWN;
-		free( lower_arg );
-		return ( LPASS_ERR_ARGS_INVALID );
+	size_t	policies_size = sizeof( policies ) / sizeof( t_cmd_policy );
+	args->cmd = LPASS_CMD_UNKNOWN;
+	for ( size_t i = 0; i < policies_size; i++ ) {
+		if (  strcmp( lower_arg, policies[ i ].str ) == 0 ) {
+			args->cmd = policies[ i ].cmd;
+			break ;
+		}
 	}
 	free( lower_arg );
+	if ( args->cmd == LPASS_CMD_UNKNOWN )
+		return ( LPASS_ERR_ARGS_INVALID );
 	return ( LPASS_OK );
 }
 
@@ -79,5 +86,10 @@ static t_lpass_error	_add_arg_to_cmd( t_args *args, char *arg ) {
 }
 
 static int	_needs_arg( t_command cmd ) {
-	return ( cmd == LPASS_CMD_COPY || cmd == LPASS_CMD_DEL || cmd == LPASS_CMD_GET );
+	size_t	policies_size = sizeof( policies ) / sizeof( t_cmd_policy );
+	for ( size_t i = 0; i < policies_size; i++ ) {
+		if ( policies[ i ].cmd == cmd )
+			return ( policies[ i ].needs_arg );
+	}
+	return ( -1 );
 }
