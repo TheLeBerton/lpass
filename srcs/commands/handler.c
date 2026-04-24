@@ -43,6 +43,14 @@ t_lpass_error	handle_cmd( t_vault *vault, t_args args ) {
 			return ( err );
 		}
 	}
+	else if ( args.cmd == LPASS_CMD_COPY ) {
+		err = cmd_copy( vault, args.argument );
+		if ( err != LPASS_OK ) {
+			free( args.argument );
+			error_handler_copy( err );
+			return ( err );
+		}
+	}
 	free( vault->entries );
 	free( vault );
 	return ( LPASS_OK );

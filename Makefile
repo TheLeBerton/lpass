@@ -1,7 +1,7 @@
 NAME 		= lpass
 NAMETEST	= test_runner
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -I./includes $(shell pkg-config --cflags libsodium) -g
+CFLAGS		= -Wall -Wextra -Werror -I./includes $(shell pkg-config --cflags libsodium) -g -O0
 LDFLAGS		= $(shell pkg-config --libs libsodium)
 TESTFLAGS	= $(shell pkg-config --cflags --libs criterion)
 PREFIX		= "$(HOME)/.local"
@@ -22,7 +22,8 @@ SRCS		= srcs/utils.c \
 			  srcs/commands/init.c \
 			  srcs/commands/add.c \
 			  srcs/commands/get.c \
-			  srcs/commands/list.c
+			  srcs/commands/list.c \
+			  srcs/commands/copy.c
 
 TESTS		= tests/entry/create_test.c \
 			  tests/entry/get_test.c \

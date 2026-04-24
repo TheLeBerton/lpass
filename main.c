@@ -18,7 +18,7 @@ int main( int argc, char **argv ) {
 	t_vault	vault = { 0 };
 	err = handle_cmd( &vault, args );
 	if ( err ) {
-		fprintf( stderr, "[ ERROR ]: handle_cmd returned error" );
+		fprintf( stderr, "[ ERROR ]: handle_cmd returned error [ %d ]\n", err );
 		return ( err );
 	}
 	return ( EXIT_SUCCESS );

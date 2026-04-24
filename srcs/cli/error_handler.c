@@ -43,3 +43,19 @@ void	error_handler_init( t_lpass_error err ) {
 		return ;
 	}
 }
+
+void	error_handler_copy( t_lpass_error err ) {
+	if ( err == LPASS_ERR_MEMORY ) { 
+		fprintf( stderr, "[ ERROR ]: memory allocation or crypto_pwhash failed\n" );
+		return ;
+	}
+	if ( err == LPASS_ERR_NULL ) { 
+		fprintf( stderr, "[ ERROR ]: vault or label is NULL\n" );
+		return ;
+	}
+	if ( err == LPASS_WARN_NOT_FOUND ) { 
+		fprintf( stderr, "[ ERROR ]: label was not found\n" );
+		return ;
+	}
+
+}
