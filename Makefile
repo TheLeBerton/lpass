@@ -20,7 +20,8 @@ SRCS		= srcs/utils.c \
 			  srcs/cli/error_handler.c \
 			  srcs/commands/handler.c \
 			  srcs/commands/init.c \
-			  srcs/commands/add.c
+			  srcs/commands/add.c \
+			  srcs/commands/get.c
 
 TESTS		= tests/entry/create_test.c \
 			  tests/entry/get_test.c \

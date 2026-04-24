@@ -5,5 +5,6 @@
 
 t_lpass_error	cmd_init( t_vault *vault ) ;
 t_lpass_error	cmd_add( t_vault *vault ) ;
+t_lpass_error	cmd_get( t_vault *vault, char *label ) ;
 
 #endif

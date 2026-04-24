@@ -27,6 +27,12 @@ t_lpass_error	handle_cmd( t_vault *vault, t_args args ) {
 			return ( err );
 		}
 	}
+	else if ( args.cmd == LPASS_CMD_GET ) {
+		err = cmd_get( vault, args.argument );
+		if ( err != LPASS_OK ) {
+			return ( err );
+		}
+	}
 	return ( LPASS_OK );
 }
 

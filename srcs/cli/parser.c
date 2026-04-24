@@ -58,6 +58,8 @@ static t_lpass_error	_handle_command( char *arg, t_args *args ) {
 		args->cmd = LPASS_CMD_DEL;
 	else if ( strcmp( lower_arg, "gen" ) == 0 )
 		args->cmd = LPASS_CMD_GEN;
+	else if ( strcmp( lower_arg, "get" ) == 0 )
+		args->cmd = LPASS_CMD_GET;
 	else {
 		args->cmd = LPASS_CMD_UNKNOWN;
 		free( lower_arg );
@@ -77,5 +79,5 @@ static t_lpass_error	_add_arg_to_cmd( t_args *args, char *arg ) {
 }
 
 static int	_needs_arg( t_command cmd ) {
-	return ( cmd == LPASS_CMD_COPY || cmd == LPASS_CMD_DEL );
+	return ( cmd == LPASS_CMD_COPY || cmd == LPASS_CMD_DEL || cmd == LPASS_CMD_GET );
 }

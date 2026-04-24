@@ -23,6 +23,7 @@ typedef enum	e_command {
 	LPASS_CMD_DEL			= 3,
 	LPASS_CMD_COPY			= 4,
 	LPASS_CMD_GEN			= 5,
+	LPASS_CMD_GET			= 6,
 	LPASS_CMD_UNKNOWN		= -1,
 }	t_command;
 
