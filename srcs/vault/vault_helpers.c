@@ -28,12 +28,19 @@ t_lpass_error	_validate_load_params( t_vault **vault, char *path ) {
 }
 
 t_lpass_error	_serialize_entries( t_vault *vault, uint8_t *key, unsigned char **cipher, size_t *cipher_len ) {
-	unsigned char	*plaintext = ( unsigned char *)&vault->entry_count;
-	size_t			plaintext_len = sizeof( uint32_t );
+	size_t			plaintext_len = sizeof( uint32_t ) + vault->entry_count * sizeof( t_entry );
 	size_t			ciphertext_len = plaintext_len + crypto_aead_xchacha20poly1305_ietf_ABYTES;
+	unsigned char	*plaintext = malloc( plaintext_len );
 	unsigned char	*ciphertext = malloc( ciphertext_len );
-	if ( !ciphertext )
+	if ( !plaintext )
 		return ( LPASS_ERR_MEMORY );
+	if ( !ciphertext ) {
+		free( plaintext );
+		return ( LPASS_ERR_MEMORY );
+	}
+	memcpy( plaintext, &vault->entry_count, sizeof( uint32_t ) );
+	if ( vault->entry_count > 0 )
+		memcpy( plaintext + sizeof( uint32_t ), vault->entries, vault->entry_count * sizeof( t_entry ) );
 	unsigned long long	actual_len;
 	crypto_aead_xchacha20poly1305_ietf_encrypt(
 		ciphertext, &actual_len,
@@ -45,6 +52,7 @@ t_lpass_error	_serialize_entries( t_vault *vault, uint8_t *key, unsigned char **
 	);
 	*cipher = ciphertext;
 	*cipher_len = ciphertext_len;
+	free( plaintext );
 	return ( LPASS_OK );
 }
 
@@ -150,6 +158,15 @@ static t_lpass_error	_parse_entries( t_vault *v, unsigned char *plain ) {
 	uint32_t	count;
 	memcpy( &count, plain, sizeof( uint32_t ) );
 	v->entry_count = count;
-	v->entries = NULL;
+	if ( count == 0 ) {
+		v->entries = NULL;
+		return ( LPASS_OK );
+	}
+	v->entries = malloc( count * sizeof( t_entry ) );
+	if ( !v->entries )
+		return ( LPASS_ERR_MEMORY );
+	for ( uint32_t i = 0; i < count; i++ ) {
+		memcpy( &v->entries[ i ], plain + sizeof( uint32_t ) + i * sizeof( t_entry ), sizeof( t_entry ) );
+	}
 	return ( LPASS_OK );
 }

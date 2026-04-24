@@ -22,7 +22,7 @@ static void	setup( void ) {
 	vault = fresh_vault();
 	t_entry_params	params = { "github", "github.com", "ftleo", "123", "blabla" };
 	t_entry_params	params1 = { "google", "google.com", "ftleo", "123", "blabla" };
-	t_entry_params	params2 = { "google", "google.com", "ccleo", "123", "blabla" };
+	t_entry_params	params2 = { "google-personal", "google.com", "ccleo", "123", "blabla" };
 	t_lpass_error	err;
 	entry_create( &vault, &params, &err );
 	entry_create( &vault, &params1, &err );
