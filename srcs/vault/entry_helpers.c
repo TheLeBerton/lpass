@@ -47,7 +47,7 @@ t_lpass_error	_alloc_entry( t_vault *vault ) {
  * Initializes a new `t_entry` from `params`, generating a UUID and timestamps.
  */
 t_entry	_init_entry( t_entry_params *params ) {
-	t_entry	entry;
+	t_entry	entry = { 0 };
 	generate_uuid( entry.id );
 	strlcpy( entry.label, params->label, sizeof( entry.label ) );
 	strlcpy( entry.url, params->url, sizeof( entry.url ) );

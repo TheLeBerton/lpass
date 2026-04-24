@@ -2,6 +2,7 @@
 #include "cli.h"
 #include "commands.h"
 
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 

@@ -5,6 +5,8 @@
 #include "vault.h"
 #include "the_commands.h"
 
+#include <stdlib.h>
+
 t_lpass_error	_load_vault( t_vault **vault ) ;
 
 t_lpass_error	handle_cmd( t_vault *vault, t_args args ) {
@@ -30,9 +32,19 @@ t_lpass_error	handle_cmd( t_vault *vault, t_args args ) {
 	else if ( args.cmd == LPASS_CMD_GET ) {
 		err = cmd_get( vault, args.argument );
 		if ( err != LPASS_OK ) {
+			free( args.argument );
+			return ( err );
+		}
+		free( args.argument );
+	}
+	else if ( args.cmd == LPASS_CMD_LIST ) {
+		err = cmd_list( vault );
+		if ( err != LPASS_OK ) {
 			return ( err );
 		}
 	}
+	free( vault->entries );
+	free( vault );
 	return ( LPASS_OK );
 }
 
