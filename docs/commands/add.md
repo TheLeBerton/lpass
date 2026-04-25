@@ -16,8 +16,10 @@ Orchestrates entry creation in order:
 ## Signature
 
 ```c
-t_lpass_error  cmd_add( t_vault *vault );
+t_lpass_error  cmd_add( t_vault *vault, char *label );
 ```
+
+`label` is unused — entry fields are collected interactively via `prompt_add`.
 
 ## Return values
 

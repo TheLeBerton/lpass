@@ -50,17 +50,25 @@ A local password manager written in C for Linux.
 
 
 ## CLI
+
+### Implemented
+
 ```
 lpass init              # create vault, set master password
-lpass add               # add an entry
-lpass get <label>       # display password in terminal
-lpass list              # list all entries
+lpass add               # add an entry (interactive prompt)
+lpass get <label>       # display entry fields in terminal
+lpass list              # list all entries (label, url, username)
 lpass delete <label>    # delete an entry
+lpass copy <label>      # copy password to clipboard
+lpass gen [length]      # generate a random password (default 20 chars)
+```
+
+### Planned
+
+```
 lpass edit <label>      # edit an entry
 lpass search <query>    # search by label/url/username
-lpass copy <label>      # copy password to clipboard
 lpass type <label>      # type password via ydotool
-lpass gen               # generate a random password
 lpass lock              # lock the vault manually
 lpass unlock            # unlock the vault
 lpass ssh add <label>   # load an SSH key into ssh-agent

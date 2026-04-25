@@ -1,16 +1,25 @@
 # Error handler
 
-This "module" is used to handle all errors received in the `main`.
+Prints error messages to stderr based on the error code returned by each subsystem.
 
 ## Methods
 
-Currently it only has one method.
-
+```c
+void  error_handler_args( t_lpass_error err );
+```
+> Called when `parse_args` fails. Prints the error and correct usage, except for `LPASS_ERR_MEMORY` (no usage printed).
 
 ```c
-void	error_handler_args( t_lpass_error err ) ;
+void  error_handler_init( t_lpass_error err );
 ```
-> This method is used if the return value of `parse_args()` is not `LPASS_OK`.
-> Printing out the error message on stderr and correct usage.
-> If the error is a `LPASS_ERR_MEMORY`, no correct usage will be printed
+> Called when `cmd_init` fails. Handles `LPASS_ERR_ALREADY_EXISTS`, `LPASS_ERR_ARGS_INVALID`, `LPASS_ERR_NULL`, `LPASS_ERR_MEMORY`.
 
+```c
+void  error_handler_copy( t_lpass_error err );
+```
+> Called when `cmd_copy` fails. Handles `LPASS_ERR_MEMORY`, `LPASS_ERR_NULL`, `LPASS_WARN_NOT_FOUND`.
+
+```c
+void  error_handler_delete( t_lpass_error err );
+```
+> Called when `cmd_delete` fails. Handles `LPASS_ERR_MEMORY`, `LPASS_ERR_NULL`, `LPASS_WARN_NOT_FOUND`.

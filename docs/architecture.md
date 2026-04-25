@@ -34,6 +34,9 @@ Enum used as return type for all fallible functions.
 | `LPASS_ERR_NULL` | -1 | Critical — NULL pointer passed |
 | `LPASS_ERR_MEMORY` | -2 | Critical — allocation failed |
 | `LPASS_ERR_FILE` | -3 | Critical — file I/O error |
+| `LPASS_ERR_ARGS_INVALID` | -4 | Critical — invalid CLI argument or passwords don't match |
+| `LPASS_ERR_ARGS_MISSING` | -5 | Critical — missing required CLI argument |
+| `LPASS_ERR_ALREADY_EXISTS` | -6 | Critical — entry or vault already exists |
 
 Negative codes = critical errors. Positive codes = expected conditions.
 
@@ -41,12 +44,19 @@ Negative codes = critical errors. Positive codes = expected conditions.
 
 | File | Responsibility |
 |------|---------------|
-| `srcs/crypto/crypto.c` | Key derivation (`derive_key`, `generate_salt`) |
-| `srcs/ui/prompt.c` | Terminal UI — password prompt with echo hide |
-| `srcs/fs/file_system.c` | Filesystem helpers (`init_lpass_dir`) |
+| `srcs/crypto/crypto.c` | Key derivation (`derive_key`, `generate_salt`, `generate_nonce`) |
+| `srcs/ui/prompt.c` | Terminal UI — password prompt, add prompt |
+| `srcs/fs/file_system.c` | Filesystem helpers (`init_lpass_dir`, `get_vault_path`) |
 | `srcs/cli/parser.c` | CLI argument parsing |
 | `srcs/cli/error_handler.c` | Error message printing |
-| `srcs/commands/init.c` | `cmd_init` orchestration |
+| `srcs/commands/init.c` | `cmd_init` — vault initialization |
+| `srcs/commands/add.c` | `cmd_add` — add an entry |
+| `srcs/commands/get.c` | `cmd_get` — display an entry |
+| `srcs/commands/list.c` | `cmd_list` — list all entries |
+| `srcs/commands/copy.c` | `cmd_copy` — copy password to clipboard |
+| `srcs/commands/delete.c` | `cmd_delete` — delete an entry |
+| `srcs/commands/gen.c` | `cmd_gen` — generate a random password |
+| `srcs/commands/handler.c` | `handle_cmd` — command dispatch via policy table |
 | `srcs/vault/vault.c` | Vault file I/O + memory allocation (save/load) |
 | `srcs/vault/vault_helpers.c` | Binary serialization/deserialization |
 | `srcs/vault/entry.c` | Entry CRUD |

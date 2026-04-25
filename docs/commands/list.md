@@ -9,8 +9,10 @@ Iterates over all entries via `entry_get` and prints a summary for each one.
 ## Signature
 
 ```c
-t_lpass_error  cmd_list( t_vault *vault );
+t_lpass_error  cmd_list( t_vault *vault, char *label );
 ```
+
+`label` is unused — the command always lists all entries.
 
 ## Output format
 
