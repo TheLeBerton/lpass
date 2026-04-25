@@ -5,69 +5,50 @@
 #include "vault.h"
 #include "the_commands.h"
 
+#include <stddef.h>
 #include <stdlib.h>
+
+typedef struct	s_cmd_policy {
+	t_command		cmd;
+	t_lpass_error	( *fn )( t_vault *, char * );
+	int				needs_vault;
+}	t_cmd_policy;
+
+
+static t_cmd_policy policies[] = {
+	{ LPASS_CMD_INIT, cmd_init, 0 },
+	{ LPASS_CMD_GEN, cmd_gen, 0 },
+	{ LPASS_CMD_ADD, cmd_add, 1 },
+	{ LPASS_CMD_GET, cmd_get, 1 },
+	{ LPASS_CMD_LIST, cmd_list, 1 },
+	{ LPASS_CMD_COPY, cmd_copy, 1 },
+	{ LPASS_CMD_DEL, cmd_delete, 1 },
+};
+size_t	policies_len = sizeof( policies ) / sizeof( t_cmd_policy );
 
 t_lpass_error	_load_vault( t_vault **vault ) ;
 
 t_lpass_error	handle_cmd( t_vault *vault, t_args args ) {
-	t_lpass_error	err;
+	t_lpass_error	err = LPASS_OK;
+	int				loaded = 0;
 
-	if ( args.cmd == LPASS_CMD_INIT ) {
-		err = cmd_init( vault );
-		if ( err != LPASS_OK ) {
-			error_handler_init( err );
-			return ( err );
-		}
-		return ( LPASS_OK );
-	}
-	else if ( args.cmd == LPASS_CMD_GEN ) {
-		err = cmd_gen( 20 );
-		if ( err != LPASS_OK )
-			return ( err );
-		return ( LPASS_OK );
-	}
-	err = _load_vault( &vault );
-	if ( err != LPASS_OK )
-		return ( err );
-	if ( args.cmd == LPASS_CMD_ADD ) {
-		err = cmd_add( vault );
-		if ( err != LPASS_OK ) {
-			return ( err );
+	for ( size_t i = 0; i < policies_len; i++ ) {
+		if ( policies[ i ].cmd == args.cmd ) {
+			if ( policies[ i ].needs_vault ) {
+				err = _load_vault( &vault );
+				if ( err != LPASS_OK )
+					break ;
+				loaded = 1;
+			}
+			err = policies[ i ].fn( vault, args.argument );
+			break ;
 		}
 	}
-	else if ( args.cmd == LPASS_CMD_GET ) {
-		err = cmd_get( vault, args.argument );
-		if ( err != LPASS_OK ) {
-			free( args.argument );
-			return ( err );
-		}
-		free( args.argument );
+	if ( loaded ) {
+		free( vault->entries );
+		free( vault );
 	}
-	else if ( args.cmd == LPASS_CMD_LIST ) {
-		err = cmd_list( vault );
-		if ( err != LPASS_OK ) {
-			return ( err );
-		}
-	}
-	else if ( args.cmd == LPASS_CMD_COPY ) {
-		err = cmd_copy( vault, args.argument );
-		if ( err != LPASS_OK ) {
-			free( args.argument );
-			error_handler_copy( err );
-			return ( err );
-		}
-	}
-	else if ( args.cmd == LPASS_CMD_DEL ) {
-		err = cmd_delete( vault, args.argument );
-		if ( err != LPASS_OK ) {
-			error_handler_delete( err );
-			free( args.argument );
-			return ( err );
-		}
-	}
-	free( vault->entries );
-	free( vault );
-	return ( LPASS_OK );
+	return ( err );
 }
 
 t_lpass_error	_load_vault( t_vault **vault ) {

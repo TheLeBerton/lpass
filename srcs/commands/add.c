@@ -8,7 +8,8 @@
 
 static t_lpass_error	_save_entry( t_vault *vault ) ;
 
-t_lpass_error	cmd_add( t_vault *vault ) {
+t_lpass_error	cmd_add( t_vault *vault, char *label ) {
+	(void)label;
 	t_entry_params	params;
 	t_lpass_error	err;
 

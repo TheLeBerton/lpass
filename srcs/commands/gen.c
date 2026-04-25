@@ -4,8 +4,13 @@
 #include <sodium/randombytes.h>
 #include <stddef.h>
 #include <stdio.h>
+#include <stdlib.h>
 
-t_lpass_error	cmd_gen( int n ) {
+t_lpass_error	cmd_gen( t_vault *vault, char *label ) {
+	(void)vault;
+	int			n = ( label && atoi( label ) > 0 ) ? atoi( label ) : 20;
+	if ( n < 4 )
+		n = 4;
 	const char	numbers[] = "0123456789";
 	const char	lowercase[] = "abcdefghijklmnopqrstuvwxyz";
 	const char	uppercase[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";

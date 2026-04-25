@@ -11,7 +11,7 @@ typedef struct	s_cmd_policy {
 	int			needs_arg;
 }	t_cmd_policy;
 
-t_cmd_policy policies[] = {
+static t_cmd_policy policies[] = {
 	{ "init", LPASS_CMD_INIT, 0 },
 	{ "add", LPASS_CMD_ADD, 0 },
 	{ "list", LPASS_CMD_LIST, 0 },

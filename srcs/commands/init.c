@@ -5,7 +5,8 @@
 #include "vault.h"
 
 
-t_lpass_error	cmd_init( t_vault *vault ) {
+t_lpass_error	cmd_init( t_vault *vault, char *label ) {
+	(void)label;
 	t_lpass_error	err;
 	uint8_t			key[ 32 ];
 	char			path[ 512 ];

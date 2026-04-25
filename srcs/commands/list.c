@@ -3,7 +3,8 @@
 
 #include <stdio.h>
 
-t_lpass_error	cmd_list( t_vault *vault ) {
+t_lpass_error	cmd_list( t_vault *vault, char *label ) {
+	(void)label;
 	t_lpass_error	err;
 	t_entry			*entry;
 
