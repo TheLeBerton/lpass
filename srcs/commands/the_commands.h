@@ -9,5 +9,6 @@ t_lpass_error	cmd_get( t_vault *vault, char *label ) ;
 t_lpass_error	cmd_list( t_vault *vault ) ;
 t_lpass_error	cmd_copy( t_vault *vault, char *label ) ;
 t_lpass_error	cmd_delete( t_vault *vault, char *label ) ;
+t_lpass_error	cmd_gen( int n ) ;
 
 #endif

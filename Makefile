@@ -24,7 +24,8 @@ SRCS		= srcs/utils.c \
 			  srcs/commands/get.c \
 			  srcs/commands/list.c \
 			  srcs/commands/copy.c \
-			  srcs/commands/delete.c
+			  srcs/commands/delete.c \
+			  srcs/commands/gen.c
 
 TESTS		= tests/entry/create_test.c \
 			  tests/entry/get_test.c \

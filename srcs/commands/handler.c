@@ -20,6 +20,12 @@ t_lpass_error	handle_cmd( t_vault *vault, t_args args ) {
 		}
 		return ( LPASS_OK );
 	}
+	else if ( args.cmd == LPASS_CMD_GEN ) {
+		err = cmd_gen( 20 );
+		if ( err != LPASS_OK )
+			return ( err );
+		return ( LPASS_OK );
+	}
 	err = _load_vault( &vault );
 	if ( err != LPASS_OK )
 		return ( err );
