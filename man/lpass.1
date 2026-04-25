@@ -1,0 +1,78 @@
+.TH LPASS 1 "2026-04-25" "lpass" "User Commands"
+.SH NAME
+lpass \- local password manager
+.SH SYNOPSIS
+.B lpass
+.I command
+.RI [ argument ]
+.SH DESCRIPTION
+.B lpass
+is a local password manager for Linux.
+Passwords are encrypted with XChaCha20-Poly1305 using a master password
+derived with Argon2id (libsodium). Nothing leaves the machine.
+.SH COMMANDS
+.TP
+.B init
+Create the vault and set the master password.
+Fails if the vault already exists.
+.TP
+.B add
+Add a new entry. Prompts interactively for label, URL, username,
+password, and notes, then re-encrypts the vault.
+.TP
+.BI get " label"
+Display all fields of the entry matching
+.IR label
+(label, URL, username, notes). The password is not printed.
+.TP
+.B list
+List all entries. Prints label, URL, and username for each entry.
+.TP
+.BI copy " label"
+Copy the password of the entry matching
+.I label
+to the system clipboard using
+.BR xclip (1).
+.TP
+.BI delete " label"
+Delete the entry matching
+.I label
+and re-encrypt the vault.
+.TP
+.BI gen " [length]"
+Generate and print a cryptographically random password.
+.I length
+defaults to 20. Minimum is 4.
+The password is guaranteed to contain at least one digit,
+one lowercase letter, one uppercase letter, and one symbol.
+.SH FILES
+.TP
+.I ~/.lpass/vault
+Encrypted vault file. Binary format:
+.BR [ salt:32 ][ nonce:24 ][ ciphertext_len:8 ][ ciphertext ] .
+.SH EXAMPLES
+.nf
+# Create the vault
+lpass init
+
+# Add an entry
+lpass add
+
+# View an entry
+lpass get github
+
+# List all entries
+lpass list
+
+# Copy a password to clipboard
+lpass copy github
+
+# Delete an entry
+lpass delete github
+
+# Generate a 32-character password
+lpass gen 32
+.fi
+.SH SEE ALSO
+.BR xclip (1),
+.BR sodium (7)

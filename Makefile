@@ -4,9 +4,10 @@ CC			= cc
 CFLAGS		= -Wall -Wextra -Werror -I./includes $(shell pkg-config --cflags libsodium) -g -O0
 LDFLAGS		= $(shell pkg-config --libs libsodium)
 TESTFLAGS	= $(shell pkg-config --cflags --libs criterion)
-PREFIX		= "$(HOME)/.local"
-BIN			= "$(PREFIX)/bin/lpass"
-LPASS_CONF	= "$(HOME)/.lpass"
+PREFIX		= $(HOME)/.local
+BIN			= $(PREFIX)/bin/lpass
+MANDIR		= $(PREFIX)/share/man/man1
+MAN			= man/lpass.1
 
 SRCS		= srcs/utils.c \
 			  srcs/vault/entry_helpers.c \
@@ -65,21 +66,20 @@ fclean: clean
 re: fclean all
 
 install: all
-	@if [ ! -f $(BIN) ]; then\
-		cp $(NAME) $(BIN);\
-		echo "[ LPASS ]: copied lpass binary to $(BIN)";\
-	fi
+	@$(MKDIR) $(PREFIX)/bin $(MANDIR)
+	@cp $(NAME) $(BIN)
+	@cp $(MAN) $(MANDIR)/lpass.1
+	@mandb -q 2>/dev/null || true
+	@echo "[ LPASS ]: installed binary  → $(BIN)"
+	@echo "[ LPASS ]: installed man page → $(MANDIR)/lpass.1"
 
 uninstall:
-	@if [ -f $(BIN) ]; then\
-		$(RM) $(BIN);\
-		echo "[ LPASS ]: removed lpass binary from $(BIN)";\
-	fi
-	@if [ -d $(LPASS_CONF) ]; then\
-		$(RM) -r $(LPASS_CONF);\
-		echo "[ LPASS ]: removed lpass config from $(LPASS_CONF)";\
-	fi
-	
+	@$(RM) $(BIN)
+	@$(RM) $(MANDIR)/lpass.1
+	@mandb -q 2>/dev/null || true
+	@echo "[ LPASS ]: removed binary  → $(BIN)"
+	@echo "[ LPASS ]: removed man page → $(MANDIR)/lpass.1"
+
 
 test: $(OBJS)
 	$(CC) $(CFLAGS) $(TESTS) $(OBJS) $(TESTFLAGS) $(LDFLAGS) -o $(NAMETEST)
