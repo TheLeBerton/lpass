@@ -51,6 +51,14 @@ t_lpass_error	handle_cmd( t_vault *vault, t_args args ) {
 			return ( err );
 		}
 	}
+	else if ( args.cmd == LPASS_CMD_DEL ) {
+		err = cmd_delete( vault, args.argument );
+		if ( err != LPASS_OK ) {
+			error_handler_delete( err );
+			free( args.argument );
+			return ( err );
+		}
+	}
 	free( vault->entries );
 	free( vault );
 	return ( LPASS_OK );
